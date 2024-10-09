@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: lib_clockifybot
-Version: 0.1
+Version: 0.2
 Author: retr0err0r - veininvein
 Requires-Dist: anyio==4.4.0
 Requires-Dist: certifi==2024.7.4

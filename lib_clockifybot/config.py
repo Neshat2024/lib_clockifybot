@@ -7,8 +7,10 @@ from telebot import types, TeleBot
 from .log import add_log
 
 load_dotenv(os.getenv('CLOCKIFY_ENV'))
-REPORT_USERNAME = TeleBot(os.getenv("TOKEN_REPORT")).get_me().username
-TRACKER_USERNAME = TeleBot(os.getenv("TOKEN_TRACKER")).get_me().username
+REPORT_USERNAME = None if os.getenv("TOKEN_REPORT") is None else \
+    TeleBot(os.getenv("TOKEN_REPORT")).get_me().username
+TRACKER_USERNAME = None if os.getenv("TOKEN_TRACKER") is None else \
+    TeleBot(os.getenv("TOKEN_TRACKER")).get_me().username
 REPORT_TABLE = "user_report"
 ok_status_codes = [200, 201]
 cancel = "/cancel"

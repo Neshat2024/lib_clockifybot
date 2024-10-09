@@ -9,9 +9,10 @@ load_dotenv(os.getenv('CLOCKIFY_ENV'))
 
 def add_log(the_error, username=None, file_path=None):
     log_channel_id = str(os.getenv("LOG_CHANNEL_ID"))
-    current_dir = os.path.dirname(os.path.abspath(__file__))
+    current_dir = os.path.dirname(os.getenv("CLOCKIFY_LOG_DIR"))
     logging_bot = TeleBot(os.getenv("TOKEN_LOGGING"))
-    report_username = TeleBot(os.getenv("TOKEN_REPORT")).get_me().username
+    report_username = None if os.getenv("TOKEN_REPORT") is None else TeleBot(
+        os.getenv("TOKEN_REPORT")).get_me().username
     username = report_username if username is None else username
     log_filename = os.path.join(current_dir, "..", f"{username}_logs.log")
     logging.basicConfig(
