@@ -1,0 +1,6 @@
+/venv/
+/.idea/
+/.gitignore
+/dist/
+/build/
+/lib_clockifybot.egg-info/
