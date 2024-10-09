@@ -8,7 +8,7 @@ def read_requirements(file):
 
 setup(
     name='lib_clockifybot',
-    version='0.3',
+    version='0.4',
     author='retr0err0r - veininvein',
     packages=find_packages(),
     install_requires=read_requirements('requirements.txt'),
