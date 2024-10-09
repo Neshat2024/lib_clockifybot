@@ -10,7 +10,7 @@ from .config import REPORT_USERNAME
 from .log import add_log
 
 
-def restore_command(backup_file, username):
+def backup_command(backup_file, username):
     db_name = "clockifybot" if username == REPORT_USERNAME else "timetrackerbot"
     return [
         "pg_dump",
@@ -34,7 +34,7 @@ def backup_database(bot):
     timestamp = dt.now().strftime("%Y%m%d_%H%M%S")
     bot_username = bot.get_me().username
     backup_file = os.path.join(backup_dir, f"{bot_username}_{timestamp}.sql")
-    command = restore_command(backup_file, bot)
+    command = backup_command(backup_file, bot)
     try:
         subprocess.run(command, check=True)
         txt = f"Backup created at: {backup_file}"
