@@ -5,6 +5,7 @@ from .config import REPORT_USERNAME, TRACKER_USERNAME, REPORT_TABLE, ok_status_c
     commands_report, commands_tracker, telegram_api_exception, send_cancel_message, change_command_to_none, get_user, \
     get_bot_by_table, get_bot_by_user
 from .database import create_database_if_not_exists
-from .duration_to_time import duration_to_time
+from .time_functions import duration_to_time, daily_interval, normal2clockify, to_iso_8601_duration, calculate_duration, \
+    get_duration
 from .log import add_log
 from .wraps import set_command
