@@ -5,6 +5,7 @@ idna==3.10
 psycopg2-binary==2.9.9
 pyTelegramBotAPI==4.23.0
 python-dotenv==1.0.1
+pytz==2024.2
 requests==2.32.3
 schedule==1.2.2
 SQLAlchemy==2.0.35

@@ -1,5 +1,9 @@
 from datetime import datetime as dt, timedelta as td
 
+import pytz
+
+tehran_tz = pytz.timezone('Asia/Tehran')
+
 
 def duration_to_time(duration_str):
     duration_str = duration_str[2:]
@@ -49,7 +53,7 @@ def to_iso_8601_duration(timedelta):
 
 def calculate_duration(time_str):
     user_start_time = dt.strptime(time_str, "%H:%M:%S")
-    end_last_record = str(dt.now())[11:19]
+    end_last_record = str(dt.now(tehran_tz))[11:19]
     user_end_time = dt.strptime(end_last_record, "%H:%M:%S")
     modified_start_time = user_start_time + td(hours=3, minutes=30)
     time_difference = user_end_time - modified_start_time
@@ -62,4 +66,3 @@ def get_duration(record):
         return duration_to_time(record["timeInterval"]["duration"])
     else:
         return calculate_duration((record["timeInterval"]["start"])[11:19])
-

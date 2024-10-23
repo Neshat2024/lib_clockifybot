@@ -4,10 +4,13 @@ import threading
 import time
 from datetime import datetime as dt
 
+import pytz
 import schedule
 
 from .config import REPORT_USERNAME
 from .log import add_log
+
+tehran_tz = pytz.timezone('Asia/Tehran')
 
 
 def backup_command(backup_file, username):
@@ -31,7 +34,7 @@ def backup_database(bot):
     backup_dir = "backups"
     if not os.path.exists(backup_dir):
         os.makedirs(backup_dir)
-    timestamp = dt.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = dt.now(tehran_tz).strftime("%Y%m%d_%H%M%S")
     bot_username = bot.get_me().username
     backup_file = os.path.join(backup_dir, f"{bot_username}_{timestamp}.sql")
     command = backup_command(backup_file, bot)
@@ -55,7 +58,7 @@ def run_scheduler():
 
 def runnner(bot):
     add_log(
-        f"Bot Started at {dt.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        f"Bot Started at {dt.now(tehran_tz).strftime('%Y-%m-%d %H:%M:%S')}",
         bot.get_me().username,
     )
     print("Bot is polling...")
@@ -63,6 +66,6 @@ def runnner(bot):
     schedule.every(12).hours.do(job_func=backup_database, bot=bot)
     bot.infinity_polling()
     add_log(
-        f"Bot Stopped at {dt.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        f"Bot Stopped at {dt.now(tehran_tz).strftime('%Y-%m-%d %H:%M:%S')}",
         bot.get_me().username,
     )
