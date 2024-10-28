@@ -37,7 +37,7 @@ def backup_database(bot):
     timestamp = dt.now(tehran_tz).strftime("%Y%m%d_%H%M%S")
     bot_username = bot.get_me().username
     backup_file = os.path.join(backup_dir, f"{bot_username}_{timestamp}.sql")
-    command = backup_command(backup_file, bot)
+    command = backup_command(backup_file, bot_username)
     try:
         subprocess.run(command, check=True)
         txt = f"Backup created at: {backup_file}"
