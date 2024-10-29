@@ -17,6 +17,7 @@ cancel = "/cancel"
 threads = {}
 stop_events = {}
 ADMIN_ROLE = "original_admin"
+SHARED_API_KEY = os.getenv("API_KEY")
 true_flag, false_flag = "True", "False"
 ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT = 1, 2, 3, 4, 5, 6, 7, 8
 monthly, pre_month = "monthly", "previous_month"

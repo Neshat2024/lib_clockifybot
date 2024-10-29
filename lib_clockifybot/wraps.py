@@ -1,6 +1,6 @@
 from sqlalchemy.exc import SQLAlchemyError
 
-from .config import get_user, get_bot_by_table, get_bot_by_user
+from .config import get_user, get_bot_by_table, get_bot_by_user, SHARED_API_KEY
 from .log import add_log
 
 
@@ -8,7 +8,7 @@ def process_add_user_in_set_command(command_message, session, table):
     try:
         command, message = command_message[0], command_message[1]
         chat_id, username = str(message.chat.id), message.chat.username
-        new_user = table(telegram_id=chat_id, username=username, command=command)
+        new_user = table(telegram_id=chat_id, username=username, api_key=SHARED_API_KEY, command=command)
         session.add(new_user)
         session.commit()
     except SQLAlchemyError as e:
