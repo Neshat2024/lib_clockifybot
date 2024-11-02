@@ -52,13 +52,12 @@ def to_iso_8601_duration(timedelta):
 
 
 def calculate_duration(time_str):
-    user_start_time = dt.strptime(time_str, "%H:%M:%S")
-    end_last_record = str(dt.now(tehran_tz))[11:19]
-    user_end_time = dt.strptime(end_last_record, "%H:%M:%S")
-    modified_start_time = user_start_time + td(hours=3, minutes=30)
-    time_difference = user_end_time - modified_start_time
-    duration = duration_to_time(to_iso_8601_duration(time_difference))
-    return duration
+    utc_time = dt.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ')
+    utc_time = utc_time.replace(tzinfo=pytz.utc)
+    tehran_time = utc_time.astimezone(tehran_tz)
+    now_tehran = dt.now(tehran_tz)
+    time_difference = now_tehran - tehran_time
+    return time_difference
 
 
 def get_duration(record):
