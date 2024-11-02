@@ -21,6 +21,8 @@ def add_api_key(message, session, table):
         add_log(f"RequestException in add_api_key: {e}", get_bot_by_table(table))
     except SQLAlchemyError as e:
         add_log(f"SQLAlchemyError in add_api_key: {e}", get_bot_by_table(table))
+    except UnicodeEncodeError:
+        pass
     except Exception as e:
         add_log(f"Exception in add_api_key: {e}", get_bot_by_table(table))
 
