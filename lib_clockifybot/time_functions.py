@@ -64,4 +64,4 @@ def get_duration(record):
     if record["timeInterval"]["duration"]:
         return duration_to_time(record["timeInterval"]["duration"])
     else:
-        return calculate_duration((record["timeInterval"]["start"])[11:19])
+        return calculate_duration(record["timeInterval"]["start"])
