@@ -20,6 +20,7 @@ class Vacation(BaseVacation):
     id = Column(Integer, primary_key=True, index=True)
     telegram_id = Column(String)
     username = Column(String)
+    clockify_id = Column(String)
     routine_vacation = Column(String)
     vdate = Column(String)
     from_hour = Column(Integer)
