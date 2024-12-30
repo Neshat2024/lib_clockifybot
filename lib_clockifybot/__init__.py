@@ -10,3 +10,4 @@ from .time_functions import duration_to_time, daily_interval, normal2clockify, t
 from .log import add_log
 from .wraps import set_command
 from .holidays import holidays
+from .vacation import init_vacation_db, Vacation
