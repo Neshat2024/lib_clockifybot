@@ -1,8 +1,8 @@
 import os
 
 from dotenv import load_dotenv
-from lib_clockifybot import add_log
-from lib_clockifybot.database import create_database_if_not_exists
+from .log import add_log
+from .database import create_database_if_not_exists
 from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
