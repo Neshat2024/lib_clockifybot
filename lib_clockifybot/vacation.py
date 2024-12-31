@@ -21,11 +21,9 @@ class Vacation(BaseVacation):
     telegram_id = Column(String)
     username = Column(String)
     clockify_id = Column(String)
-    routine_vacation = Column(String)
+    routine_shift = Column(String)
     vdate = Column(String)
-    from_hour = Column(Integer)
-    to_hour = Column(Integer)
-    whole_day = Column(Boolean, default=False)
+    hours = Column(String)
     confirmed_by = Column(String)
 
     def __repr__(self):
