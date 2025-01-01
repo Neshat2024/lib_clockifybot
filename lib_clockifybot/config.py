@@ -12,7 +12,7 @@ REPORT_USERNAME = None if os.getenv("TOKEN_REPORT") is None else \
 TRACKER_USERNAME = None if os.getenv("TOKEN_TRACKER") is None else \
     TeleBot(os.getenv("TOKEN_TRACKER")).get_me().username
 REPORT_TABLE = "user_report"
-REQUEST_CHANNEL_ID = os.getenv("REQUEST_CHANNEL_ID")
+REQUEST_CHANNEL_ID = os.getenv("REQUESTS_CHANNEL_ID")
 DAYS_FOR_HEADERS = ["/", "SA", "SU", "MO", "TU", "WE", "TH"]
 HEADER, SELECT, REMOVE, CONFIRM = "header", "select", "remove", "confirm"
 WHOLE_DAY_HOURS = "8-9-10-11-12-13-14-15-16-17-18-19-20"
