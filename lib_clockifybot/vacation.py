@@ -22,6 +22,7 @@ class Vacation(BaseVacation):
     username = Column(String)
     coolname = Column(String)
     clockify_id = Column(String)
+    vdate = Column(String)
     workday = Column(String)
     hours = Column(String)
     status = Column(String) #
