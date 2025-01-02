@@ -28,7 +28,7 @@ class Vacation(BaseVacation):
     status = Column(String) #
     is_vacation = Column(Boolean)
     def __repr__(self):
-        return f"User('{self.username}') - VacationDate('{self.vdate}' - RoutineVacation('{self.routine_vacation}'))"
+        return f"User('{self.username}') - VacationDate('{self.vdate}' - RoutineVacation('{self.workday}'))"
 
 
 def init_vacation_db(bot):
