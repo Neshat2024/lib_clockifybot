@@ -25,8 +25,8 @@ class Vacation(BaseVacation):
     vdate = Column(String)
     workday = Column(String)
     hours = Column(String)
-    status = Column(String) #
-    is_vacation = Column(Boolean)
+    status = Column(String)
+    is_vacation = Column(Boolean, default=False)
     def __repr__(self):
         return f"User('{self.username}') - VacationDate('{self.vdate}' - RoutineVacation('{self.workday}'))"
 
