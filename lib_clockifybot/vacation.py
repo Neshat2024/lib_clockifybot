@@ -22,13 +22,12 @@ class Vacation(BaseVacation):
     username = Column(String)
     coolname = Column(String)
     clockify_id = Column(String)
-    vdate = Column(String)
     workday = Column(String)
     hours = Column(String)
     status = Column(String)
     is_vacation = Column(Boolean, default=False)
     def __repr__(self):
-        return f"User('{self.username}') - VacationDate('{self.vdate}' - RoutineVacation('{self.workday}'))"
+        return f"User('{self.username}') - RoutineVacation('{self.workday}'))"
 
 
 def init_vacation_db(bot):
