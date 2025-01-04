@@ -45,3 +45,25 @@ def set_command(command, session, table):
         return wrapper
 
     return decorator
+
+
+def check_username(bot, session, table):
+    def decorator(handler):
+        def wrapper(message):
+            try:
+                user = get_user(message, session, table)
+                username = message.from_user.username
+                if user.username == username:
+                    return handler(message)
+                else:
+                    user.username = username
+                    session.commit()
+                    return handler(message)
+            except SQLAlchemyError as e:
+                add_log(
+                    f"SQLAlchemyError in check_username: {e}", bot.get_me().username
+                )
+
+        return wrapper
+
+    return decorator

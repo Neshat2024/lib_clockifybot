@@ -68,9 +68,13 @@ def change_command_to_none(user, session, bot):
         add_log(f"Exception in change_command_to_none: {e}", bot.get_me().username)
 
 
-def get_user(message, session, table):
-    chat_id = str(message.chat.id)
-    return session.query(table).filter_by(telegram_id=chat_id).first()
+def get_user(call_or_message, session, table):
+    if isinstance(call_or_message, types.Message):
+        chat_id = str(call_or_message.chat.id)
+        return session.query(table).filter_by(telegram_id=chat_id).first()
+    elif isinstance(call_or_message, types.CallbackQuery):
+        chat_id = str(call_or_message.message.chat.id)
+        return session.query(table).filter_by(telegram_id=chat_id).first()
 
 
 def get_bot_by_table(table):
