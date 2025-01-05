@@ -26,7 +26,7 @@ stop_events = {}
 ADMIN_ROLE = "original_admin"
 SHARED_API_KEY = os.getenv("API_KEY")
 true_flag, false_flag = "True", "False"
-ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT = 1, 2, 3, 4, 5, 6, 7, 8
+ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT = 0, 1, 2, 3, 4, 5, 6, 7, 8
 monthly, pre_month = "monthly", "previous_month"
 commands_report = [types.BotCommand(command="/start", description="Start menu")]
 commands_tracker = [
@@ -91,3 +91,39 @@ def get_bot_by_user(user):
         return REPORT_USERNAME
     else:
         return TRACKER_USERNAME
+
+
+def hours_to_txt(hours):
+    try:
+        text = ""
+        category_list = create_category_list(hours)
+        for category in category_list:
+            index = category_list.index(category)
+            if len(category) > 1 and index == len(category_list) - 1:
+                text += f"{category[0]} to {category[-1]}"
+            elif len(category) > 1:
+                text += f"{category[0]} to {category[-1]} | "
+            elif index == len(category_list) - 1:
+                text += f"{category[0]}"
+            else:
+                text += f"{category[0]} | "
+        return text
+    except Exception as e:
+        add_log(f"Exception in hours_to_txt: {e}")
+
+
+def create_category_list(hours):
+    try:
+        hours_list = sorted([int(hour) for hour in hours.split("-")])
+        category_list = []
+        for hour in hours_list:
+            index = hours_list.index(hour)
+            if index == ZERO:
+                category_list.append([hour])
+            elif hour - hours_list[index - 1] == ONE:
+                category_list[-1].append(hour)
+            else:
+                category_list.append([hour])
+        return category_list
+    except Exception as e:
+        add_log(f"Exception in create_category_list: {e}")
