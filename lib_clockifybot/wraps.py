@@ -53,12 +53,10 @@ def check_username(bot, session, table):
             try:
                 user = get_user(message, session, table)
                 username = message.from_user.username
-                if user.username == username:
-                    return handler(message)
-                else:
+                if user.username != username:
                     user.username = username
                     session.commit()
-                    return handler(message)
+                return handler(message)
             except SQLAlchemyError as e:
                 add_log(
                     f"SQLAlchemyError in check_username: {e}", bot.get_me().username
