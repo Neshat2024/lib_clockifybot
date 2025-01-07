@@ -6,17 +6,35 @@ from telebot import types, TeleBot
 
 from .log import add_log
 
-load_dotenv(os.getenv('CLOCKIFY_ENV'))
-REPORT_USERNAME = None if os.getenv("TOKEN_REPORT") is None else \
-    TeleBot(os.getenv("TOKEN_REPORT")).get_me().username
-TRACKER_USERNAME = None if os.getenv("TOKEN_TRACKER") is None else \
-    TeleBot(os.getenv("TOKEN_TRACKER")).get_me().username
+load_dotenv(os.getenv("CLOCKIFY_ENV"))
+REPORT_USERNAME = (
+    None
+    if os.getenv("TOKEN_REPORT") is None
+    else TeleBot(os.getenv("TOKEN_REPORT")).get_me().username
+)
+TRACKER_USERNAME = (
+    None
+    if os.getenv("TOKEN_TRACKER") is None
+    else TeleBot(os.getenv("TOKEN_TRACKER")).get_me().username
+)
 REPORT_TABLE = "user_report"
 REQUEST_CHANNEL_ID = os.getenv("REQUESTS_CHANNEL_ID")
 DAYS_FOR_HEADERS = ["/", "SA", "SU", "MO", "TU", "WE", "TH"]
-days_dict = {"SA": "Saturday", "SU": "Sunday", "MO": "Monday", "TU": "Tuesday", "WE": "Wednesday", "TH": "Thursday"}
-day_order = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday']
-PENDING, SELECTED, CONFIRMED_BY, REJECTED_BY = "PENDING", "SELECTED", "CONFIRMED_BY", "REJECTED_BY"
+days_dict = {
+    "SA": "Saturday",
+    "SU": "Sunday",
+    "MO": "Monday",
+    "TU": "Tuesday",
+    "WE": "Wednesday",
+    "TH": "Thursday",
+}
+day_order = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]
+PENDING, SELECTED, CONFIRMED_BY, REJECTED_BY = (
+    "PENDING",
+    "SELECTED",
+    "CONFIRMED_BY",
+    "REJECTED_BY",
+)
 HEADER, SELECT, REMOVE, CONFIRM = "header", "select", "remove", "confirm"
 WHOLE_DAY_HOURS = "8-9-10-11-12-13-14-15-16-17-18-19-20"
 SHIFT = "shift"

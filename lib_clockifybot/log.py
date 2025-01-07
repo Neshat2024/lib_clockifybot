@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from telebot import TeleBot
 
-load_dotenv(os.getenv('CLOCKIFY_ENV'))
+load_dotenv(os.getenv("CLOCKIFY_ENV"))
 
 
 def add_log(the_error, username=None, file_path=None):
@@ -27,4 +27,3 @@ def add_log(the_error, username=None, file_path=None):
                 logging_bot.send_document(os.getenv("BACKUP_CHANNEL_ID"), file)
     except Exception as e:
         logging_bot.send_message(log_channel_id, f"Error in sending Backup - {e}")
-

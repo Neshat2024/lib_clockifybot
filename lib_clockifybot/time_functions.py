@@ -2,7 +2,7 @@ from datetime import datetime as dt, timedelta as td
 
 import pytz
 
-tehran_tz = pytz.timezone('Asia/Tehran')
+tehran_tz = pytz.timezone("Asia/Tehran")
 
 
 def duration_to_time(duration_str):
@@ -52,7 +52,7 @@ def to_iso_8601_duration(timedelta):
 
 
 def calculate_duration(time_str):
-    utc_time = dt.strptime(time_str, '%Y-%m-%dT%H:%M:%SZ')
+    utc_time = dt.strptime(time_str, "%Y-%m-%dT%H:%M:%SZ")
     utc_time = utc_time.replace(tzinfo=pytz.utc)
     tehran_time = utc_time.astimezone(tehran_tz)
     now_tehran = dt.now(tehran_tz)

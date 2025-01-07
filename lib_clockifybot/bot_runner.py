@@ -10,7 +10,7 @@ import schedule
 from .config import REPORT_USERNAME
 from .log import add_log
 
-tehran_tz = pytz.timezone('Asia/Tehran')
+tehran_tz = pytz.timezone("Asia/Tehran")
 
 
 def backup_command(backup_file, username):

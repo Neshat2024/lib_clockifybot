@@ -4,3 +4,4 @@
 lib_clockifybot.egg-info/
 build/
 dist/
+.pre-commit-config.yaml

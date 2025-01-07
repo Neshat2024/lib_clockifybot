@@ -7,9 +7,9 @@ def read_requirements(file):
 
 
 setup(
-    name='lib_clockifybot',
-    version='2.6',
-    author='retr0err0r - veininvein',
+    name="lib_clockifybot",
+    version="2.7",
+    author="retr0err0r - veininvein",
     packages=find_packages(),
-    install_requires=read_requirements('requirements.txt'),
+    install_requires=read_requirements("requirements.txt"),
 )

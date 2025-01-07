@@ -1,6 +1,12 @@
 from sqlalchemy.exc import SQLAlchemyError
 
-from .config import get_user, get_bot_by_table, get_bot_by_user, SHARED_API_KEY, REPORT_USERNAME
+from .config import (
+    get_user,
+    get_bot_by_table,
+    get_bot_by_user,
+    SHARED_API_KEY,
+    REPORT_USERNAME,
+)
 from .log import add_log
 
 
@@ -21,12 +27,13 @@ def set_command(command, session, table):
 
 def process_add_user_in_set_command(command_message, session, table):
     try:
-        command, message = command_message[0], command_message[1]
-        chat_id, username = str(message.chat.id), message.chat.username
+        api = SHARED_API_KEY
+        cmd, message = command_message[0], command_message[1]
+        ch_id, usr = str(message.chat.id), message.chat.username
         if get_bot_by_table(table) == REPORT_USERNAME:
-            new_user = table(telegram_id=chat_id, username=username, api_key=SHARED_API_KEY, command=command)
+            new_user = table(telegram_id=ch_id, username=usr, api_key=api, command=cmd)
         else:
-            new_user = table(telegram_id=chat_id, username=username, command=command)
+            new_user = table(telegram_id=ch_id, username=usr, command=cmd)
         session.add(new_user)
         session.commit()
     except SQLAlchemyError as e:
@@ -73,7 +80,9 @@ def process_add_user_in_check_username(message, session, table):
     try:
         chat_id, username = str(message.chat.id), message.chat.username
         if get_bot_by_table(table) == REPORT_USERNAME:
-            new_user = table(telegram_id=chat_id, username=username, api_key=SHARED_API_KEY)
+            new_user = table(
+                telegram_id=chat_id, username=username, api_key=SHARED_API_KEY
+            )
         else:
             new_user = table(telegram_id=chat_id, username=username)
         session.add(new_user)
