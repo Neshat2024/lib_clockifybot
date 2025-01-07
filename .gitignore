@@ -1,7 +1,7 @@
 .venv/
 .idea/
-.gitignore
+/.gitignore
 lib_clockifybot.egg-info/
 build/
 dist/
-.pre-commit-config.yaml
+/.pre-commit-config.yaml
