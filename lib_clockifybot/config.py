@@ -52,6 +52,8 @@ commands_tracker = [
     types.BotCommand(command="/start", description="Start menu"),
     types.BotCommand(command="/api", description="⚙️ Configure the API key"),
 ]
+BACK_TEXT = "⬅️ Back"
+SELECT_SHIFT_TEXT = "📆 Select your Shift hours in week:"
 
 
 def telegram_api_exception(bot, func, error):
