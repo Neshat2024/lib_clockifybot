@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, BigInteger
+from sqlalchemy import create_engine, Column, Integer, String, Boolean, Numeric
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 from .database import create_database_if_not_exists
@@ -26,7 +26,7 @@ class Vacation(BaseVacation):
     hours = Column(String)
     status = Column(String)
     is_vacation = Column(Boolean, default=False)
-    request_id = Column(BigInteger)
+    request_id = Column(Numeric)
 
     def __repr__(self):
         return f"User('{self.username}') - RoutineVacation('{self.workday}'))"

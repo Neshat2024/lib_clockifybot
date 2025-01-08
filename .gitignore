@@ -1,0 +1,7 @@
+/lib_clockifybot.egg-info/
+/dist/
+/build/
+/.venv/
+/.idea/
+/.pre-commit-config.yaml
+/.gitignore
