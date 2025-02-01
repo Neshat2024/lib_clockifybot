@@ -54,6 +54,7 @@ commands_tracker = [
 ]
 BACK_TEXT = "⬅️ Back"
 SELECT_SHIFT_TEXT = "📆 Select your Shift hours in week:"
+HEADERS_TYPE = "application/json"
 
 
 def telegram_api_exception(bot, func, error):
