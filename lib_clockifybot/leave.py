@@ -9,14 +9,14 @@ from .log import add_log
 
 load_dotenv(os.getenv("CLOCKIFY_ENV"))
 
-VACATION_URL = os.getenv("DATABASE_URL_VACATION")
-engine = create_engine(VACATION_URL)
-BaseVacation = declarative_base()
+LEAVE_URL = os.getenv("DATABASE_URL_LEAVE")
+engine = create_engine(LEAVE_URL)
+BaseLeave = declarative_base()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-class Vacation(BaseVacation):
-    __tablename__ = "vacation"
+class Leave(BaseLeave):
+    __tablename__ = "leave"
     id = Column(Integer, primary_key=True, index=True)
     telegram_id = Column(String)
     username = Column(String)
@@ -25,16 +25,16 @@ class Vacation(BaseVacation):
     workday = Column(String)
     hours = Column(String)
     status = Column(String)
-    is_vacation = Column(Boolean, default=False)
+    is_leave = Column(Boolean, default=False)
     request_id = Column(Numeric)
 
     def __repr__(self):
-        return f"User('{self.username}') - RoutineVacation('{self.workday}'))"
+        return f"User('{self.username}') - RoutineLeave('{self.workday}'))"
 
 
-def init_vacation_db(bot):
-    create_database_if_not_exists(VACATION_URL, bot)
+def init_leave_db(bot):
+    create_database_if_not_exists(LEAVE_URL, bot)
     try:
-        BaseVacation.metadata.create_all(engine)
+        BaseLeave.metadata.create_all(engine)
     except Exception as e:
-        add_log(f"Error creating Vacation table: {e}")
+        add_log(f"Error creating Leave table: {e}")
