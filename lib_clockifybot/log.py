@@ -31,12 +31,12 @@ def add_log(the_error, username=None, file_path=None):
 
 
 def log_to_elasticsearch(message, bot):
-    if os.getenv("elk_api") is None:
+    if os.getenv("ELK_API") is None:
         return
     apm = Client(
         service_name=bot.get_me().username,
-        server_url=os.getenv("elk_url"),
-        secret_token=os.getenv("elk_api"),
+        server_url=os.getenv("ELK_URL"),
+        secret_token=os.getenv("ELK_API"),
     )
     log_entry = {
         "user_id": message.from_user.id,
