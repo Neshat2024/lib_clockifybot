@@ -41,7 +41,6 @@ SHIFT = "shift"
 ok_status_codes = [200, 201]
 cancel = "/cancel"
 threads = {}
-stop_events = {}
 ADMIN_ROLE = "original_admin"
 SHARED_API_KEY = os.getenv("API_KEY")
 true_flag, false_flag = "True", "False"

@@ -2,6 +2,7 @@ import logging
 import os
 
 from dotenv import load_dotenv
+from elasticapm import Client
 from telebot import TeleBot
 
 load_dotenv(os.getenv("CLOCKIFY_ENV"))
@@ -27,3 +28,20 @@ def add_log(the_error, username=None, file_path=None):
                 logging_bot.send_document(os.getenv("BACKUP_CHANNEL_ID"), file)
     except Exception as e:
         logging_bot.send_message(log_channel_id, f"Error in sending Backup - {e}")
+
+
+def log_to_elasticsearch(message, bot):
+    if os.getenv("elk_api") is None:
+        return
+    apm = Client(
+        service_name=bot.get_me().username,
+        server_url=os.getenv("elk_url"),
+        secret_token=os.getenv("elk_api"),
+    )
+    log_entry = {
+        "user_id": message.from_user.id,
+        "username": message.from_user.username,
+        "message": message.text,
+        "timestamp": message.date,
+    }
+    apm.capture_message(message.text, custom=log_entry)
