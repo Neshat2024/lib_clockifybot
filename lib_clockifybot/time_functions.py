@@ -2,8 +2,6 @@ from datetime import datetime as dt, timedelta as td
 
 import pytz
 
-from lib_clockifybot import add_log
-
 tehran_tz = pytz.timezone("Asia/Tehran")
 
 
@@ -70,42 +68,35 @@ def get_duration(record):
 
 
 def days_to_txt(dates_list):
-    try:
-        dates, fulldate_format = [], "%Y-%m-%d (%A)"
-        for d in dates_list:
-            date_obj = dt.strptime(d, "%Y-%m-%d").date()
-            dates.append(date_obj)
-        sorted_dates = sorted(dates)
-        categories = create_date_categories(sorted_dates)
-        text_parts = []
-        for category in categories:
-            if len(category) > 1:
-                start = category[0].strftime(fulldate_format)
-                end = category[-1].strftime(fulldate_format)
-                text_parts.append(f"{start} to {end}")
-            else:
-                text_parts.append(category[0].strftime(fulldate_format))
-        return " | ".join(text_parts)
-    except Exception as e:
-        add_log(f"Exception in dates_to_txt: {e}", "lib_clockifybot")
-        return ""
+    dates, fulldate_format = [], "%Y-%m-%d (%A)"
+    for d in dates_list:
+        date_obj = dt.strptime(d, "%Y-%m-%d").date()
+        dates.append(date_obj)
+    sorted_dates = sorted(dates)
+    categories = create_date_categories(sorted_dates)
+    text_parts = []
+    for category in categories:
+        if len(category) > 1:
+            start = category[0].strftime(fulldate_format)
+            end = category[-1].strftime(fulldate_format)
+            text_parts.append(f"{start} to {end}")
+        else:
+            text_parts.append(category[0].strftime(fulldate_format))
+    return " | ".join(text_parts)
 
 
 def create_date_categories(sorted_dates):
-    try:
-        categories = []
-        if not sorted_dates:
-            return categories
-        current_category = [sorted_dates[0]]
-        for date_obj in sorted_dates[1:]:
-            prev_date = current_category[-1]
-            delta = date_obj - prev_date
-            if delta.days == 1:
-                current_category.append(date_obj)
-            else:
-                categories.append(current_category)
-                current_category = [date_obj]
-        categories.append(current_category)
+    categories = []
+    if not sorted_dates:
         return categories
-    except Exception as e:
-        add_log(f"Exception in create_date_categories: {e}", "lib_clockifybot")
+    current_category = [sorted_dates[0]]
+    for date_obj in sorted_dates[1:]:
+        prev_date = current_category[-1]
+        delta = date_obj - prev_date
+        if delta.days == 1:
+            current_category.append(date_obj)
+        else:
+            categories.append(current_category)
+            current_category = [date_obj]
+    categories.append(current_category)
+    return categories
