@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, Numeric
+from sqlalchemy import create_engine, Column, Integer, String, Numeric
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 from .database import create_database_if_not_exists
@@ -25,7 +25,7 @@ class Leave(BaseLeave):
     workday = Column(String)
     hours = Column(String)
     status = Column(String)
-    is_leave = Column(Boolean, default=False)
+    mode = Column(String)
     request_id = Column(Numeric)
 
     def __repr__(self):
@@ -38,3 +38,18 @@ def init_leave_db(bot):
         BaseLeave.metadata.create_all(engine)
     except Exception as e:
         add_log(f"Error creating Leave table: {e}")
+
+
+def leave_type_text(mode):
+    match mode:
+        case "partremote":
+            t = "Part-time Remote"
+        case "partvac":
+            t = "Part-time Absence"
+        case "fullremote":
+            t = "Full-time Remote"
+        case "fullvac":
+            t = "Full-time Absence"
+        case _:
+            t = "UNKNOWN"
+    return t
