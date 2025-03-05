@@ -2,7 +2,7 @@ import requests
 from requests import RequestException
 from sqlalchemy.exc import SQLAlchemyError
 
-from .config import get_user, ok_status_codes, get_bot_by_table, send_cancel_message
+from .config import get_user, get_bot_by_table, send_cancel_message
 from .log import add_log
 
 
@@ -10,7 +10,7 @@ def add_api_key(message, session, table):
     try:
         url = "https://api.clockify.me/api/v1/user"
         response = requests.get(url, headers={"X-Api-Key": message.text})
-        if response.status_code in ok_status_codes:
+        if response.ok:
             clockify_id = response.json()["id"]
             user = get_user(message, session, table)
             user.api_key = message.text
