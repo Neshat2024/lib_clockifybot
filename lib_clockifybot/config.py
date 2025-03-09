@@ -50,6 +50,7 @@ commands_tracker = [
     types.BotCommand(command="/start", description="Start menu"),
     types.BotCommand(command="/api", description="⚙️ Configure the API key"),
 ]
+CONFIRM_TEXT = "🟢 Confirm 🟢"
 BACK_TEXT = "⬅️ Back"
 SELECT_SHIFT_TEXT = "📆 Select your Shift hours in week:"
 HEADERS_TYPE = "application/json"

@@ -28,6 +28,7 @@ from .config import (
     get_user,
     get_bot_by_table,
     get_bot_by_user,
+    CONFIRM_TEXT,
 )
 from .database import create_database_if_not_exists
 from .time_functions import (
