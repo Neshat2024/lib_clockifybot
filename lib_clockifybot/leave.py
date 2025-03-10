@@ -26,10 +26,12 @@ class Leave(BaseLeave):
     hours = Column(String)
     status = Column(String)
     mode = Column(String)
+    substitute = Column(String)
+    description = Column(String)
     request_id = Column(Numeric)
 
     def __repr__(self):
-        return f"User('{self.username}') - RoutineLeave('{self.workday}'))"
+        return f"(User('{self.username}') - Workday('{self.workday}') - Hour('{self.hours}') - Status('{self.status}'))"
 
 
 def init_leave_db(bot):
