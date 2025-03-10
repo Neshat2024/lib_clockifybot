@@ -12,7 +12,7 @@ load_dotenv(os.getenv("CLOCKIFY_ENV"))
 LEAVE_URL = os.getenv("DATABASE_URL_LEAVE")
 engine = create_engine(LEAVE_URL)
 BaseLeave = declarative_base()
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = sessionmaker(autoflush=True, bind=engine)
 
 
 class Leave(BaseLeave):
